@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Smash Tracker";
+}
+@section PageScripts {
+	<script type="text/javascript" src="~/JS/Pages/Home/Index.js"></script>
+}
+
+<div id="PageContent" class="table" ng-controller="HomeController" ng-hide="$parent.PageLoading">
+	<div class="row">
+		<div class="cell tablehalignmiddle">
+			<div class="BeltHolderBanner" ng-if="BeltMatch.WinningMatchPlayer != null">
+				<div class="BeltHolderCharacter" ng-style="{'background-image':'url(\'../Images/Portraits/{{$parent.Characters[BeltMatch.WinningMatchPlayer.Character]}}.png\')'}">&nbsp;</div>
+				<h2>Current Champion:</h2>
+				<h2>{{BeltMatch.WinningMatchPlayer.Player.Name}}</h2>
+			</div>
+
+			<h1>Recent Matches</h1>
+
+			<div class="Match" ng-repeat="match in Matches">
+
+				<div class="MatchHeader table fullwidth">
+					<div class="row">
+						<div class="cell">
+							<p>#{{match.Id}}</p>
+						</div>
+						<div class="cell fullwidth">
+							<p class="aligncenter">{{match.TeamType}}</p>
+						</div>
+						<div class="cell">
+							<p>{{$parent.RuleSets[match.RuleSet]}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="TeamsContainer">
+					<div class="Teams" ng-repeat="team in match.Teams">
+						<div class="TeamPlacement table fullwidth">
+							<div class="row">
+								<div class="cell">
+									<img ng-src="../Images/Placements/Placement{{team.Placement}}.png" alt="{{team.Placement}}" />
+								</div>
+								<div class="cell">
+									<h3 class="Asterisk" ng-if="match.Asterisk">*</h3>
+								</div>
+								<div class="cell fullwidth">
+									<div class="table">
+										<div class="row">
+											<div class="cell">
+												<h3>Team {{$index + 1}}</h3>
+											</div>
+										</div>
+										<div class="row">
+											<div class="cell">
+												<h3>KOs: {{team.KillCount}}</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="PlayerNames table">
+							<div class="row">
+								<div class="cell" ng-repeat="player in team.Players">
+									<img class="CharacterPortrait" ng-class="'CharacterPortraitTeam{{team.Placement}}'" ng-src="../Images/CharacterIcons/{{$parent.Characters[player.Character]}}.png" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="cell" ng-repeat="player in team.Players">
+									<p class="PlayerName">{{player.Player.Name}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="MatchDetails table fullwidth">
+					<div class="row">
+						<div class="cell fullwidth">
+							<p class="alignright">{{match.Created | date:'yyyy/MM/dd'}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

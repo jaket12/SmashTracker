@@ -1,0 +1,615 @@
+﻿@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, div, ul, li, a {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	font-size: 20px;
+	font-weight: bold;
+	color: #000;
+	text-align: center;
+}
+
+input, label {
+	font-size: 18px;
+}
+
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+
+select {
+	font-size: 24px;
+	margin: 0;
+	padding: 10px;
+	text-align-last: center;
+}
+
+.table {
+	display: table;
+}
+
+.row {
+	display: table-row;
+}
+
+.cell {
+	display: table-cell;
+}
+
+.valigntop {
+	vertical-align: top;
+}
+
+.tablevalignmiddle {
+	vertical-align: middle;
+}
+
+.tablehalignmiddle {
+	text-align: center;
+}
+
+.fullwidth {
+	width: 100%;
+}
+
+.fullheight {
+	height: 100%;
+}
+
+.autowidth {
+	width: auto;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.aligncenter {
+	text-align: center;
+}
+
+.alignright {
+	text-align: right;
+}
+
+.ErrorMessage {
+	color: #ff5500;
+	font-size: 14px;
+}
+
+#LayoutHeader {
+	background-color: #5071AB;
+	width: 100%;
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding: 0;
+	height: 50px;
+	z-index: 10;
+}
+
+#LayoutHeaderBox {
+	display: table-row;
+}
+
+#LayoutHeaderBoxPadding {
+	display: table-cell;
+	height: 70px;
+	width: 100%;
+}
+
+.LayoutHeaderTitle {
+	font-size: 36px;
+	color: #ffffff;
+	margin: 0;
+	padding: 0;
+	float: left;
+	position: absolute;
+	top: 0;
+	left: 0;
+	line-height: 50px;
+	width: 100%;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+	z-index: 11;
+}
+
+.LayoutHeaderMenuButton {
+	font-size: 36px;
+	color: #ffffff;
+	margin: 0;
+	padding: 0 0 0 10px;
+	display: inline-block;
+	position: relative;
+	line-height: 50px;
+	z-index: 12;
+}
+
+.LayoutHeaderMenuButton_Expanded {
+	color: #404040;
+}
+
+.LayoutHeaderPulloutMenu {
+	background-color: #5071AB;
+	width: 100%;
+	display: block;
+	position: fixed;
+	top: 50px;
+	left: 0;
+	padding: 0;
+	margin: 0;
+	border: 2px solid #404040;
+	border-left: 0;
+	border-right: 0;
+	z-index: 9;
+	height: 0px;
+	transition: height 0.5s;
+	overflow-x: auto;
+	overflow-y: scroll;
+	max-height: 70vh;
+}
+
+.LayoutHeaderPulloutMenu_Expanded {
+	height: 250px;
+}
+
+.LayoutHeaderPulloutMenu ul {
+	padding: 0 40px;
+	margin: 0;
+}
+
+.LayoutHeaderPulloutMenu li {
+	border-bottom: 1px #ffffff solid;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-weight: bold;
+	color: #ffffff;
+	font-size: 24px;
+}
+
+.LayoutHeaderPulloutMenu a {
+	color: #ffffff;
+	text-decoration: none;
+	cursor: pointer;
+	padding: 10px 0;
+	margin: 0;
+	width: 100%;
+	display: block;
+}
+
+
+#LayoutContainer {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+
+#LayoutBody {
+	display: table-row;
+	height: 100%;
+	width: 100%;
+}
+
+#PageBody {
+	display: table-cell;
+	height: 100%;
+}
+
+#PageContent {
+	padding: 0 10px;
+	margin: 0 auto;
+	width: 382px;
+}
+
+#LayoutFooter {
+	display: table-row;
+}
+
+#LayoutFooterContent {
+	display: table-cell;
+	background-color: #5071AB;
+	width: 100%;
+	border-top: 2px solid #404040;
+	min-height: 20px;
+	overflow: hidden;
+}
+
+.LoadingIconMain {
+
+}
+
+.LoadingIconImage {
+	-webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+.SubmitButton {
+	border-radius: 4px;
+	border: 1px solid #e0ab26;
+	background-color: #e0ab26;
+	min-width: 120px;
+	min-height: 40px;
+	margin: 10px auto;
+}
+
+.PopUpClose {
+	font-size: 24px;
+	margin: 0;
+	padding: 0;
+	display: block;
+	text-align: right;
+	width: 100%;
+}
+
+select.PlayerChangeList {
+	min-width: 200px;
+	width: 100%;
+	font-size: 32px;
+}
+
+.Match {
+	border: 1px solid #e0ab26;
+	padding: 12px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	border-radius: 6px;
+	background-color: #e0ab26;
+	display: block;
+	width: 340px;
+}
+
+.MatchHeader {
+	margin: 0 0 12px;
+}
+
+.MatchHeader p {
+	font-weight: bold;
+	font-size: 18px;
+	padding: 0;
+	margin: 0;
+}
+
+.MatchHeader select {
+	max-width: 200px;
+}
+
+.Match h3 {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	max-width: 68px;
+}
+
+.MatchDetails p {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+
+.TeamsContainer {
+	display: inline-block;
+}
+
+.Teams {
+	border: 1px solid #ffd772;
+	border-radius: 6px;
+	background-color: #ffd772;
+	margin: 8px;
+	padding: 4px;
+	display: inline-block;
+}
+
+.ButtonAddNewTeam {
+	border: 1px solid #ffd772;
+	border-radius: 6px;
+	background-color: #ffd772;
+	margin: 8px;
+	padding: 6px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.ButtonAddNewTeam h3 {
+	max-width: initial;
+}
+
+.TeamPlacement img {
+	display: inline-block;
+	width: 65px;
+	height: 65px;
+	margin: 0 8px 8px 0;
+}
+
+.TeamPlacement .cell {
+	vertical-align: middle;
+}
+
+.TeamPlacement .Asterisk {
+	padding-right: 10px;
+	display: inline-block;
+}
+
+.TeamPlacementValues .cell {
+	text-align: left;
+}
+
+.Teams .PlayerName {
+	width: 65px;
+	overflow: hidden;
+	text-wrap: none;
+	text-overflow: ellipsis;
+}
+
+.Teams .PlayerNames {
+	margin: 0 auto;
+}
+
+.TeamAddPlayerDescription p {
+	margin: 0 0 6px 0;
+}
+
+.Match .Characters {
+	display: inline-block;
+}
+
+.Match .CharacterPortrait {
+	max-width: 65px;
+	height: 65px;
+	border: 1px solid #000;
+	border-radius: 4px;
+	padding: 1px;
+	background-color: #000;
+	margin-right: 2px;
+}
+
+.Match .CharacterPortraitTeam1 {
+	background-color: #CD4655;
+	border-color: #CD4655;
+}
+
+.Match .CharacterPortraitTeam2 {
+	background-color: #7073DB;
+	border-color: #7073DB;
+}
+
+.Match .CharacterPortraitTeam3 {
+	background-color: #D5A950;
+	border-color: #D5A950;
+}
+
+.Match .CharacterPortraitTeam4 {
+	background-color: #5BD171;
+	border-color: #5BD171;
+}
+
+.Match .CharacterPortraitTeam5 {
+	background-color: #CD722B;
+	border-color: #CD722B;
+}
+
+.Match .CharacterPortraitTeam6 {
+	background-color: #53E0C0;
+	border-color: #53E0C0;
+}
+
+.Match .CharacterPortraitTeam7 {
+	background-color: #D042D2;
+	border-color: #D042D2;
+}
+
+.Match .CharacterPortraitTeam8 {
+	background-color: #5D527C;
+	border-color: #5D527C;
+}
+
+#NewMatchChangePlacementPopUp {
+	border-radius: 6px;
+	border: 1px solid #000;
+	background-color: #fff;
+	width: 80vw;
+	padding: 8px;
+	min-height: 200px;
+	max-height: 80vh;
+	display: block;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow: scroll;
+}
+
+#NewMatchChangePlacementPopUp .cell {
+	display: inline-block;
+	text-align: center;
+}
+
+#NewMatchChangePlacementPopUp img {
+	width: 65px;
+	height: 65px;
+	padding: 2px;
+}
+
+
+#NewMatchChangePlayerPopUp {
+	border-radius: 6px;
+	border: 1px solid #000;
+	background-color: #fff;
+	width: 80vw;
+	padding: 8px;
+	min-height: 200px;
+	max-height: 80vh;
+	display: block;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow: scroll;
+}
+
+#NewMatchChangePlayerPopUp .cell {
+	display: inline-block;
+	text-align: center;
+}
+
+#NewMatchChangePlayerPopUp img {
+	width: 65px;
+	height: 65px;
+	padding: 2px;
+}
+
+.NewMatchNewPlayerButton {
+	border: 1px solid #000;
+	border-radius: 4px;
+	padding: 1px;
+	width: 65px;
+	max-width: 65px;
+	height: 65px;
+	display: inline-block;
+	background-color: transparent;
+	margin-right: 2px;
+}
+
+.DeleteTeamIcon {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0;
+	font-size: 36px;
+}
+
+.DeleteTeamCell {
+	vertical-align: top !important;
+}
+
+.NewCharacterSelected {
+	border: 2px solid #000;
+	margin: -2px;
+}
+
+.PopUpFuzzBackground {
+	background-color: rgba(0,0,0,0.5);
+	z-index: 10;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+#SavingWaitPopUp {
+	border-radius: 6px;
+	border: 1px solid #000;
+	background-color: #fff;
+	min-width: 300px;
+	padding: 8px;
+	display: block;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow: scroll;
+	z-index: 11;
+}
+
+#SavingWaitPopUp h3 {
+	margin-bottom: 20px;
+}
+
+#SavingWaitPopUp .table {
+	margin-bottom: 20px;
+}
+
+.NewPlayerPage {
+	text-align: center;
+}
+
+.NewPlayerForm {
+	display: inline-block;
+}
+
+.NewPlayerForm .cell {
+	padding: 8px;
+}
+
+.PlayerList {
+	text-align: left;
+	border-radius: 6px;
+	/*border: 1px solid #5071AB;
+	background-color: #5071AB;*/
+	padding: 8px;
+}
+
+.PlayerListInner {
+	border-radius: 6px;
+	border: 1px solid #6fc3ed;
+	background-color: #6fc3ed;
+	padding: 8px;
+	margin: 4px 0;
+	width: 350px;
+}
+
+.PlayerListInner .row .cell:first-child {
+	text-align: right;
+}
+
+.PlayerList p, .PlayerList span {
+	margin: 0;
+	padding: 0;
+}
+
+.PlayerList p {
+	font-size: 24px;
+}
+
+.PlayerList .Label {
+	font-weight: bold;
+	margin-right: 20px;
+}
+
+.BeltHolderBanner {
+	height: 100px;
+	margin: 0;
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.BeltHolderCharacter {
+	width: 100%;
+	height: 100%;
+	opacity: 0.3;
+	background-position: bottom left;
+	background-size: contain;
+	background-repeat: no-repeat;
+	position: absolute;
+	bottom: 0;
+	left: -62px;
+	display: block;
+}
+
+@media only screen and (max-device-width : 800px) and (min-device-width : 640px) {
+
+}
+
+@media only screen and (min-device-width : 800px) {
+
+}

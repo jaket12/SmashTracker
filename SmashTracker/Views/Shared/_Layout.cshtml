@@ -1,0 +1,66 @@
+﻿@using Newtonsoft.Json
+@model SmashTracker.ViewModels.SiteLayout
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/CSS/FrontEnd")
+    @Scripts.Render("~/JS/FrontEnd")
+	<script type="text/javascript">
+		var EnumCharacters = angular.fromJson(@Html.Raw(JsonConvert.SerializeObject(Model.Characters)));
+		var EnumRuleSets = angular.fromJson(@Html.Raw(JsonConvert.SerializeObject(Model.RuleSets)));
+	</script>
+	@RenderSection("PageScripts", false)
+</head>
+<body ng-app="SmashApp" ng-controller="MainController" ng-cloak>
+	<div id="LayoutHeader" class="table">
+		<div class="row">
+			<div class="cell">
+				<span class="LayoutHeaderMenuButton fa fa-bars" aria-hidden="true">&nbsp;</span>
+			</div>
+			<div class="cell fullwidth">
+				<p class="LayoutHeaderTitle">Smash Tracker</p>
+			</div>
+		</div>
+	</div>
+	<div class="LayoutHeaderPulloutMenu">
+		<ul>
+			<li><a href="/">Recent Matches</a></li>
+			<li><a href="/NewMatch">New Match</a></li>
+			<li><a href="/NewPlayer">Manage Players</a></li>
+			<li><a href="javascript:void(0)">Player Stats</a></li>
+			<li><a href="/BeltMatch">Belt Matches</a></li>
+			<li><a href="http://jacobodden.github.io/random-smash-character">Random Character</a></li>
+		</ul>
+	</div>
+
+	<div id="LayoutContainer">
+		<div id="LayoutHeaderBox">
+			<div id="LayoutHeaderBoxPadding">&nbsp;</div>
+		</div>
+		<div id="LayoutBody">
+			<div id="PageBody">
+				<div class="LoadingIconMain table fullwidth fullheight" ng-show="PageLoading">
+					<div class="row fullwidth fullheight">
+						<div class="cell fullwidth fullheight tablevalignmiddle tablehalignmiddle">
+							<img class="LoadingIconImage" src="../Images/SmashBumper.png" />
+						</div>
+					</div>
+				</div>
+				<div class="ErrorMessage" ng-if="AjaxErrorMessage.length > 0">
+					<p class="bold aligncenter">There was an error loading the page.</p>
+					<p ng-if="AjaxErrorMessageShow">{{AjaxErrorMessage}}</p>
+				</div>
+				@RenderBody()
+			</div>
+		</div>
+		<div id="LayoutFooter">
+			<div id="LayoutFooterContent">
+				<p>The smash tracker is the thing that is the thing</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

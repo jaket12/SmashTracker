@@ -1,0 +1,156 @@
+﻿@{
+	ViewBag.Title = "Smash Tracker";
+}
+@section PageScripts {
+	<script type="text/javascript" src="~/JS/Pages/Home/NewMatch.js"></script>
+}
+
+<div id="PageContent" class="table fullwidth" style="padding: 0;" ng-controller="NewMatchController" ng-hide="$parent.PageLoading">
+	<div class="row">
+		<div class="cell tablehalignmiddle">
+			<h1>Record A New Match</h1>
+
+			<p style="color:red;" ng-repeat="warning in ValidationMessages">{{warning}}</p>
+
+			<div class="Match">
+				<div class="MatchHeader table fullwidth">
+					<div class="row">
+						<div class="cell">
+							<div style="min-width: 120px;">
+								<input type="checkbox" ng-model="Match.Asterisk" name="Asterisk" id="NewMatchAsterisk" ng-disabled="SavingWaitShow" />
+								<label for="NewMatchAsterisk">Asterisk</label>
+							</div>
+						</div>
+						<div class="cell fullwidth">
+							<p class="aligncenter">{{Match.TeamType}}</p>
+						</div>
+						<div class="cell">
+							<select ng-model="Match.RuleSet" name="RuleSet" id="NewMatchRuleSet" ng-disabled="SavingWaitShow">
+								<option ng-repeat="rule in $parent.RuleSets" value="{{$index}}">{{rule}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="Teams" style="display: block;" ng-repeat="team in Match.Teams">
+					<div class="TeamPlacement table fullwidth">
+						<div class="row">
+							<div class="cell">
+								<img ng-src="../Images/Placements/Placement{{team.Placement}}.png" alt="{{team.Placement}}" ng-click="SelectTeamPlacement($index)" ng-disabled="SavingWaitShow" />
+							</div>
+							<div class="cell">
+								<h3 class="Asterisk" ng-if="Match.Asterisk">*</h3>
+							</div>
+							<div class="cell fullwidth">
+								<div class="TeamPlacementValues table">
+									<div class="row">
+										<div class="cell">
+											<h3>Team {{$index + 1}}</h3>
+										</div>
+									</div>
+									<div class="row">
+										<div class="cell">
+											<h3>KOs: <input type="number" min="0" max="99" step="1" ng-model="team.KillCount" placeholder="0" ng-disabled="SavingWaitShow" /></h3>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="cell DeleteTeamCell" valign="top">
+								<p class="DeleteTeamIcon"><i class="fa fa-times-circle" aria-hidden="true" ng-click="DeleteNewTeam($index)" ng-disabled="SavingWaitShow"></i></p>
+							</div>
+						</div>
+					</div>
+					<div class="TeamAddPlayerDescription">
+						<p>Tap an image to add or edit players:</p>
+					</div>
+					<div class="PlayerNames table">
+						<div class="row">
+							<div class="cell" ng-repeat="player in team.Players">
+								<img class="CharacterPortrait" ng-class="'CharacterPortraitTeam{{$parent.$index + 1}}'" ng-src="../Images/CharacterIcons/{{$parent.Characters[player.Character]}}.png" ng-click="SelectPlayerAndCharacter($parent.$index, $index)" ng-disabled="SavingWaitShow" />
+							</div>
+							<div class="cell" ng-if="team.Players.length < 4">
+								<img class="CharacterPortrait" ng-class="'CharacterPortraitTeam8'" ng-src="../Images/CharacterIcons/{{$parent.Characters[0]}}.png" ng-click="AddNewPlayerAndCharacter($index)" ng-disabled="SavingWaitShow" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="cell" ng-repeat="player in team.Players">
+								<p class="PlayerName">{{player.Player.Name}}</p>
+							</div>
+							<div class="cell" ng-if="team.Players.length < 4">
+								<p class="PlayerName">&nbsp;</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ButtonAddNewTeam" ng-click="AddNewTeam()" ng-disabled="SavingWaitShow" ng-if="Match.Teams.length < 8">
+					<h3>Add new Team</h3>
+				</div>
+			</div>
+
+			<div>
+				<input class="SubmitButton" type="button" ng-click="SaveNewMatch()" value="Save" ng-disabled="SavingWaitShow" />
+				<input class="SubmitButton" type="button" ng-click="ResetMatch()" value="Reset" ng-disabled="SavingWaitShow" />
+			</div>
+
+			<div class="PopUpFuzzBackground" ng-show="ChangePlacementShow && !SavingWaitShow" ng-click="ChangePlacementShow = false" ng-disabled="SavingWaitShow">
+				<div id="NewMatchChangePlacementPopUp" ng-click="$event.stopPropagation();">
+					<p class="PopUpClose"><i class="fa fa-times-circle" aria-hidden="true" ng-click="ChangePlacementShow = false" ng-disabled="SavingWaitShow"></i></p>
+					<h3>Choose a placement for Team {{TeamToChangePlacement + 1}}</h3>
+					<p><span ng-repeat="player in Match.Teams[TeamToChangePlacement].Players">{{player.Name}} </span></p>
+					<div class="table">
+						<div class="row">
+							<div class="cell" ng-repeat="placement in [1,2,3,4,5,6,7,8]" ng-if="placement <= Match.Teams.length" ng-class="{'NewCharacterSelected': placement == Match.Teams[TeamToChangePlacement].Placement}">
+								<img ng-src="../Images/Placements/Placement{{placement}}.png" alt="{{placement}}" ng-click="ChangeTeamPlacement(TeamToChangePlacement, placement)" ng-disabled="SavingWaitShow" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="PopUpFuzzBackground" ng-show="ChangePlayerShow && !SavingWaitShow" ng-click="ChangePlayerShow = false" ng-disabled="SavingWaitShow">
+				<div id="NewMatchChangePlayerPopUp" ng-click="$event.stopPropagation();">
+					<p class="PopUpClose"><i class="fa fa-times-circle" aria-hidden="true" ng-click="ChangePlayerShow = false" ng-disabled="SavingWaitShow"></i></p>
+					<h3>Edit a Player for Team {{PlayerTeamToChangePlayer + 1}}</h3>
+
+					<div>
+						<input class="SubmitButton" type="button" ng-click="ChangePlayerShow = false" value="Done" ng-disabled="SavingWaitShow" />
+						<input class="SubmitButton" type="button" ng-click="DeleteNewPlayer(PlayerTeamToChangePlayer, PlayerToChangePlayer); ChangePlayerShow = false;" value="Delete Player" ng-disabled="SavingWaitShow" />
+					</div>
+
+					<select ng-options="player.Name for player in Players" ng-model="Match.Teams[PlayerTeamToChangePlayer].Players[PlayerToChangePlayer].Player" name="PlayerChangeList" class="PlayerChangeList" ng-disabled="SavingWaitShow"></select>
+
+					<div class="table">
+						<div class="row">
+							<div class="cell" ng-repeat="character in $parent.Characters" ng-class="{'NewCharacterSelected': character == $parent.Characters[Match.Teams[PlayerTeamToChangePlayer].Players[PlayerToChangePlayer].Character]}">
+								<img class="CharacterPortrait" ng-class="'CharacterPortraitTeam{{PlayerTeamToChangePlayer + 1}}'" ng-src="../Images/CharacterIcons/{{$parent.Characters[$index]}}.png" ng-click="ChangePlayerCharacter(PlayerTeamToChangePlayer, PlayerToChangePlayer, $index)" ng-disabled="SavingWaitShow" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="PopUpFuzzBackground" ng-show="SavingWaitShow">
+				<div id="SavingWaitPopUp">
+					<div class="table fullwidth">
+						<div class="row">
+							<div class="cell tablehalignmiddle">
+								<h3 ng-if="!ShowSaveSuccess">Saving new match...</h3>
+								<h3 ng-if="ShowSaveSuccess">Saved!</h3>
+							</div>
+						</div>
+						<div class="row">
+							<div class="cell tablehalignmiddle">
+								<div class="LoadingIconMain table fullwidth" ng-show="!ShowSaveSuccess">
+									<div class="row">
+										<div class="cell">
+											<img class="LoadingIconImage" src="../Images/SmashBumper.png" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

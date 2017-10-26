@@ -1,0 +1,45 @@
+﻿@{
+	ViewBag.Title = "Smash Tracker";
+}
+@section PageScripts {
+	<script type="text/javascript" src="~/JS/Pages/Home/BeltMatch.js"></script>
+}
+
+<div id="PageContent" class="table" ng-controller="BeltMatchController" ng-hide="$parent.PageLoading">
+	<div class="row">
+		<div class="cell tablehalignmiddle">
+			<div class="BeltHolderBanner" ng-if="BeltMatch.WinningMatchPlayer != null">
+				<div class="BeltHolderCharacter" ng-style="{'background-image':'url(\'../Images/Portraits/{{$parent.Characters[BeltMatch.WinningMatchPlayer.Character]}}.png\')'}">&nbsp;</div>
+				<h2>Current Champion:</h2>
+				<h2>{{BeltMatch.WinningMatchPlayer.Player.Name}}</h2>
+			</div>
+
+			<h2><span ng-if="BeltMatch.FinalMatch != null">Last</span><span ng-if="BeltMatch.FinalMatch == null">Current</span> Belt Match Records</h2>
+
+			<div ng-if="RuleSet == null">
+				<h3>No matches found</h3>
+			</div>
+
+			<div ng-if="RuleSet == 'BeltMatchPoints'">
+				<h3>Point System</h3>
+
+				<div class="table">
+					<div class="row">
+						<div class="cell">
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-if="RuleSet == 'BeltMatchElimination'">
+				<h3>Elimination System</h3>
+
+			</div>
+
+			<div ng-if="RuleSet == 'BeltMatchRoundRobin'">
+				<h3>Round Robin System</h3>
+			</div>
+		</div>
+	</div>
+</div>

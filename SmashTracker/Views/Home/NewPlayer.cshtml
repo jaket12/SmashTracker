@@ -1,0 +1,98 @@
+﻿@{
+	ViewBag.Title = "Smash Tracker";
+}
+@section PageScripts {
+	<script type="text/javascript" src="~/JS/Pages/Home/NewPlayer.js"></script>
+}
+
+<div id="PageContent" class="NewPlayerPage" ng-controller="NewPlayerController" ng-hide="$parent.PageLoading">
+
+	<p style="color:red;" ng-repeat="warning in ValidationMessages">{{warning}}</p>
+
+	<h1>New Player</h1>
+
+	<div class="NewPlayerForm table">
+		<div class="row">
+			<div class="cell">
+				<label for="Name">Name:</label>
+			</div>
+			<div class="cell">
+				<input type="text" ng-model="NewPlayer.Name" name="Name" ng-disabled="SavingWaitShow" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="cell">
+				<label for="PlayerTag">Tag:</label>
+			</div>
+			<div class="cell">
+				<input type="text" ng-model="NewPlayer.PlayerTag" name="PlayerTag" ng-disabled="SavingWaitShow" />
+			</div>
+		</div>
+	</div>
+
+	<div class="fullwidth aligncenter">
+		<input class="SubmitButton" type="button" ng-click="SaveNewPlayer()" value="Save" ng-disabled="SavingWaitShow" />
+	</div>
+
+	<div class="fullwidth">
+		<p>Current Players:</p>
+		<div class="PlayerList fullwidth table">
+			<div class="row">
+				<div class="cell">
+					<div class="PlayerListInner table" ng-repeat="player in CurrentPlayers">
+						<div class="row">
+							<div class="cell">
+								<p class="Label">Name:</p>
+							</div>
+							<div class="cell fullwidth">
+								<p class="Value" ng-hide="PlayerToEdit == $index">{{player.Name}}</p>
+								<input type="text" ng-show="PlayerToEdit == $index" ng-model="player.Name" />
+							</div>
+							<div class="cell">
+								<p class="Value" ng-hide="PlayerToEdit != null" ng-click="EnablePlayerEdit($index)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></p>
+								<p class="Value" ng-show="PlayerToEdit == $index" ng-click="SavePlayerEdit()"><i class="fa fa-floppy-o" aria-hidden="true"></i></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="cell">
+								<p class="Label">Tag:</p>
+							</div>
+							<div class="cell fullwidth">
+								<p class="Value" ng-hide="PlayerToEdit == $index">{{player.PlayerTag}}</p>
+								<input type="text" ng-show="PlayerToEdit == $index" ng-model="player.PlayerTag" />
+							</div>
+							<div class="cell">
+								<p class="Value" ng-show="PlayerToEdit == $index" ng-click="UndoPlayerEdit()"><i class="fa fa-undo" aria-hidden="true"></i></p>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="PopUpFuzzBackground" ng-show="SavingWaitShow">
+		<div id="SavingWaitPopUp">
+			<div class="table fullwidth">
+				<div class="row">
+					<div class="cell tablehalignmiddle">
+						<h3 ng-if="!ShowSaveSuccess">Saving new player...</h3>
+						<h3 ng-if="ShowSaveSuccess">{{NewPlayer.Name}} Saved!</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="cell tablehalignmiddle">
+						<div class="LoadingIconMain table fullwidth" ng-show="!ShowSaveSuccess">
+							<div class="row">
+								<div class="cell">
+									<img class="LoadingIconImage" src="../Images/SmashBumper.png" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
